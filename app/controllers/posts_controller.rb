@@ -5,14 +5,18 @@ class PostsController < ApplicationController
 	end #index
 
 	def new	
-		
+		@post = Post.new
 	end #new
 
 	def create
 		@post = Post.new post_params
 
-		@post.save
-		redirect_to @post
+		if @post.save
+			redirect_to @post
+		else
+			render 'new'
+		end
+		
 	end #create
 
 	def show
