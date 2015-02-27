@@ -16,7 +16,7 @@ class PostsController < ApplicationController
 		else
 			render 'new'
 		end
-		
+
 	end #create
 
 	def show
@@ -24,6 +24,26 @@ class PostsController < ApplicationController
 	end #show
 
 
+	def edit
+		@post = Post.find params[:id]
+	end #edit
+
+	def update
+		@post = Post.find params[:id]
+
+		if @post.update(params[:post].permit(:title, :body))
+			redirect_to @post
+		else
+			render 'edit'
+		end #if
+	end #update
+
+	def destroy
+		@post = Post.find params [:id]
+		@post.destroy
+
+		redirect_to posts_path
+	end #destroy
 
 	private
 
